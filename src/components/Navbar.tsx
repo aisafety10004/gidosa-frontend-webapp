@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
         {/* 데스크탑 네비게이션 링크 - 회원가입 페이지가 아닐 때만 표시 */}
         {!isRegisterPage && (
           <div className="hidden md:flex md:items-center md:gap-8">
-            <Link
+            {/* <Link
               to="/about"
               className="px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md focus:outline-none"
             >
@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
               className="px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md focus:outline-none"
             >
               Mission
-            </Link>
+            </Link> */}
             <Link
               to="/Login"
               className="px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md focus:outline-none"
@@ -85,7 +85,7 @@ const Navbar: React.FC = () => {
           `}
         >
           <div className="flex flex-col py-2">
-            <Link
+            {/* <Link
               to="/about"
               onClick={closeMenu}
               className="px-8 py-3 text-gray-700 hover:bg-gray-50 focus:outline-none"
@@ -98,7 +98,7 @@ const Navbar: React.FC = () => {
               className="px-8 py-3 text-gray-700 hover:bg-gray-50 focus:outline-none"
             >
               Mission
-            </Link>
+            </Link> */}
             <Link
               to="/login"
               onClick={closeMenu}
