@@ -48,6 +48,9 @@ jobs:
           #     pwd
           #     sh deploy-ssh.sh  
           script: |
+              source ~/.bashrc
               cd ~/apps-gidosa_net/gidosa-frontend-webapp
-              /home/ai_safety_system/.nvm/versions/node/v20.18.2/bin/npm install
-              /home/ai_safety_system/.nvm/versions/node/v20.18.2/bin/npm run build
+              npm install
+              npm run build
+              # /home/ai_safety_system/.nvm/versions/node/v20.18.2/bin/npm install
+              # /home/ai_safety_system/.nvm/versions/node/v20.18.2/bin/npm run build
