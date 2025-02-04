@@ -48,7 +48,7 @@ jobs:
           #     pwd
           #     sh deploy-ssh.sh  
           script: |
-              source ~/.bashrc
+              #source ~/.bashrc
               cd ~/apps-gidosa_net/gidosa-frontend-webapp
               npm install
               npm run build
