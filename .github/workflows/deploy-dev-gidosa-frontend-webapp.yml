@@ -27,10 +27,27 @@ on:
 
 jobs:
   # 의존성 빌드 테스트
-  build-codedeploy:
+  build-deploy:
     # environment: dev
     runs-on: ubuntu-22.04
     permissions: write-all
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        continue-on-error: true
+        with:
+          host: ${{ secrets.SSH_HOST }} 
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          # script: |
+          #     cd ${{ github.event.repository.name }}
+          #     pwd
+          #     sh deploy-ssh.sh  
+          script: |
+              cd ~/apps-gidosa_net/gidosa-frontend-webapp
+              npm install
+              npm run build
