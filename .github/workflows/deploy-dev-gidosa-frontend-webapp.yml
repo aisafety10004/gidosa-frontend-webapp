@@ -50,7 +50,9 @@ jobs:
           script: |
               #source ~/.bashrc
               #ln -s /home/ai_safety_system/.nvm/versions/node/v20.18.2/bin/node /usr/local/bin/node
+              #ln -s /home/ai_safety_system/.nvm/versions/node/v20.18.2/bin/npm /usr/local/bin/npm
               cd ~/apps-gidosa_net/gidosa-frontend-webapp
+              git pull
               npm install
               npm run build
               # /home/ai_safety_system/.nvm/versions/node/v20.18.2/bin/npm install
