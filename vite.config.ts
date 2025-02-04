@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    allowedHosts: ['dev.gidosa.net'] // 여기에 호스트 추가!
+    allowedHosts: ['dev1.gidosa.net'] // 여기에 호스트 추가!
   },
 })
