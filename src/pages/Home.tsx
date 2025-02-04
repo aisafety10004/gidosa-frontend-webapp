@@ -29,7 +29,7 @@ const Home: React.FC = () => {
     <div className="flex justify-between items-center gap-8">
       <div className="flex-1">
         <h1 className="text-5xl text-[#1a237e] mb-4">
-          Landing5 page template for developers & startups
+          Landing6 page template for developers & startups
         </h1>
         <p className="text-xl text-gray-600 mb-8">
           Beautifully designed templates using React.js, ant design and styled-components! 
