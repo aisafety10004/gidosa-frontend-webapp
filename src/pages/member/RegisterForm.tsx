@@ -18,19 +18,30 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto h-screen flex items-center justify-center p-6 bg-white w-3/5">
-      <div className="w-full bg-white p-6">
+    <div className="w-full mx-auto flex items-center justify-center p-4 sm:p-6 bg-white">
+      <div className="w-full bg-white mt-20">
         <h2 className="text-2xl font-bold mb-6 text-black">회원가입</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm text-gray-600 mb-1">아이디</label>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="text"
                 className="flex-1 p-2 border rounded bg-white placeholder-gray-400"
                 placeholder="영문, 숫자 6-20자리"
+                value={form.id}
+                onChange={(e) => setForm({ ...form, id: e.target.value })}
               />
-              <button className="px-4 py-2 bg-gray-200 rounded">중복확인</button>
+              <button 
+                className={`w-full sm:w-auto px-4 py-2 rounded ${
+                  form.id 
+                    ? 'bg-yellow-500 text-white hover:bg-yellow-500' 
+                    : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                }`}
+                disabled={!form.id}
+              >
+                중복확인
+              </button>
             </div>
           </div>
 
@@ -70,8 +81,13 @@ const RegisterForm: React.FC = () => {
                     name="age"
                     value="14up"
                     className="hidden"
+                    checked={form.age === '14세 이상'}
+                    onChange={(e) => setForm({ ...form, age: '14세 이상' })}
                 />
-                <div className="text-center py-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                <div className={`text-center py-3 border rounded-md cursor-pointer transition-colors
+                    ${form.age === '14세 이상' 
+                      ? 'bg-blue-50 border-blue-500 text-blue-700' 
+                      : 'border-gray-300 hover:bg-gray-50'}`}>
                     14세 이상
                 </div>
                 </label>
@@ -81,37 +97,42 @@ const RegisterForm: React.FC = () => {
                     name="age"
                     value="14down"
                     className="hidden"
+                    checked={form.age === '14세 미만'}
+                    onChange={(e) => setForm({ ...form, age: '14세 미만' })}
                 />
-                <div className="text-center py-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                <div className={`text-center py-3 border rounded-md cursor-pointer transition-colors
+                    ${form.age === '14세 미만' 
+                      ? 'bg-blue-50 border-blue-500 text-blue-700' 
+                      : 'border-gray-300 hover:bg-gray-50'}`}>
                     14세 미만
                 </div>
                 </label>
             </div>
             </div>
 
-          <div>
+          {/* <div>
             <label className="block text-sm text-gray-600 mb-1">휴대폰번호</label>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="text"
                 className="flex-1 p-2 border rounded bg-white placeholder-gray-400"
                 placeholder="-없이 입력해 주세요."
               />
-              <button className="px-4 py-2 bg-gray-200 rounded">인증번호 받기</button>
+              <button className="w-full sm:w-auto px-4 py-2 bg-gray-200 rounded">인증번호 받기</button>
             </div>
           </div>
 
           <div>
             <label className="block text-sm text-gray-600 mb-1">인증번호 입력</label>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="text"
                 className="flex-1 p-2 border rounded bg-white placeholder-gray-400"
                 placeholder="인증번호 6자리"
               />
-              <button className="px-4 py-2 bg-gray-200 rounded">확인</button>
+              <button className="w-full sm:w-auto px-4 py-2 bg-gray-200 rounded">확인</button>
             </div>
-          </div>
+          </div> */}
 
           <button
             type="submit"

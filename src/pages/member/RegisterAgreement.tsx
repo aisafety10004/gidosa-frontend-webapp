@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const RegisterAgreement: React.FC = () => {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ const RegisterAgreement: React.FC = () => {
               onChange={handleAllCheck}
               className={`w-5 h-5 rounded ${agreements.all ? 'bg-white border-gray-300 accent-blue-500' : 'bg-gray-100 border-gray-200'} focus:ring-blue-500`}
             />
-            <span className={`font-semibold text-black`}>약관 전체동의</span>
+            <span className={`font-semibold text-black text-sm`}>약관 전체동의</span>
           </label>
 
           <div className="space-y-2">
@@ -64,7 +64,15 @@ const RegisterAgreement: React.FC = () => {
                 onChange={() => handleSingleCheck('terms')}
                 className="w-5 h-5 rounded bg-white border-gray-300 accent-blue-500 focus:ring-blue-500"
               />
-              <span className={`font-semibold text-black`}>홈노크타운·홈노크존 서비스 이용약관 (필수)</span>
+              <span className={`font-semibold text-black text-sm`}>위험안전 관리 서비스 이용약관 (필수)</span>
+              <a 
+                href="/document/terms1" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-sm cursor-pointer"
+              >
+                <span className="text-black-600">보기</span>
+              </a>
             </label>
 
             <label className="flex items-center gap-2 p-4 border rounded">
@@ -74,7 +82,15 @@ const RegisterAgreement: React.FC = () => {
                 onChange={() => handleSingleCheck('privacy')}
                 className="w-5 h-5 rounded bg-white border-gray-300 accent-blue-500 focus:ring-blue-500"
               />
-              <span className={`font-semibold text-black`}>트러스테이 개인정보 수집 및 이용동의 (필수)</span>
+              <span className={`font-semibold text-black text-sm`}>gidosa 개인정보 수집 및 이용동의 (필수)</span>
+              <a 
+                href="/document/privacy1" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-sm cursor-pointer"
+              >
+                <span className="text-black-600">보기</span>
+              </a>
             </label>
 
             <label className="flex items-center gap-2 p-4 border rounded">
@@ -84,7 +100,15 @@ const RegisterAgreement: React.FC = () => {
                 onChange={() => handleSingleCheck('location')}
                 className="w-5 h-5 rounded bg-white border-gray-300 accent-blue-500 focus:ring-blue-500"
               />
-              <span className={`font-semibold text-black`}>트러스테이 프로모션 정보수신 동의 (선택)</span>
+              <span className={`font-semibold text-black text-sm`}>gidosa 프로모션 정보수신 동의 (선택)</span>
+              <a 
+                href="/document/marketing1" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-sm cursor-pointer"
+              >
+                <span className="text-black-600">보기</span>
+              </a>
             </label>
           </div>
         </div>
