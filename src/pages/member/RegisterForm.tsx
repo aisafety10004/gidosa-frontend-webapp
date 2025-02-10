@@ -1,20 +1,89 @@
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+// API 호출 함수 정의
+const registerUser = async (userData: {
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  name: string;
+  age: string;
+}) => {
+  const response = await axios.post(process.env.VITE_GIDOSA_BACKEND_API_URL + '/member-general', userData);
+  return response.data;
+};
 
 const RegisterForm: React.FC = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
-    id: '',
+    email: '',
     password: '',
     passwordConfirm: '',
     name: '',
-    phone: '',
+    //phone: '',
     age: '14세 이상',
     verificationCode: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // 회원가입 처리 로직
+  // React Query mutation 설정
+  const mutation = useMutation({
+    mutationFn: registerUser,
+    onSuccess: () => {
+      alert('회원가입이 완료되었습니다.');
+      navigate('/auth/login');
+    },
+    onError: (error: any) => {
+      alert(error.response?.data?.message || '회원가입 중 오류가 발생했습니다.\n\n관리자에게 문의해주세요.');
+    },
+  });
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // 유효성 검사
+    if (!form.email || !form.password || !form.passwordConfirm || !form.name) {
+      alert('모든 필수 항목을 입력해주세요.');
+      return;
+    }
+
+    if (form.password !== form.passwordConfirm) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    // ------------------------------------------------------------
+    // 이메일 정규식 검사 (이메일 형식)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(form.email)) {
+      alert('이메일 형식이 올바르지 않습니다.');
+      return;
+    }
+    
+    // 비밀번호 정규식 검사 (영문+숫자+특수문자 8-20자리)
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+    if (!passwordRegex.test(form.password)) {
+      alert('비밀번호는 영문, 숫자, 특수문자를 포함하여 8-20자리로 입력해주세요.');
+      return;
+    }
+
+    // 이름 정규식 검사 (한글 또는 영문 2-10자리) 
+    const nameRegex = /^[가-힣a-zA-Z]{2,10}$/;
+    if (!nameRegex.test(form.name)) {
+      alert('이름은 한글 또는 영문 2-10자리로 입력해주세요.');
+      return;
+    }
+
+    // API 호출
+    mutation.mutate({
+      email: form.email,
+      password: form.password,
+      passwordConfirm: form.passwordConfirm,
+      name: form.name,
+      age: form.age,
+    });
   };
 
   return (
@@ -23,22 +92,22 @@ const RegisterForm: React.FC = () => {
         <h2 className="text-2xl font-bold mb-6 text-black">회원가입</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm text-gray-600 mb-1">아이디</label>
+            <label className="block text-sm text-gray-600 mb-1">이메일</label>
             <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="text"
                 className="flex-1 p-2 border rounded bg-white placeholder-gray-400"
-                placeholder="영문, 숫자 6-20자리"
-                value={form.id}
-                onChange={(e) => setForm({ ...form, id: e.target.value })}
+                placeholder="이메일"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
               />
               <button 
                 className={`w-full sm:w-auto px-4 py-2 rounded ${
-                  form.id 
+                  form.email 
                     ? 'bg-yellow-500 text-white hover:bg-yellow-500' 
                     : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 }`}
-                disabled={!form.id}
+                disabled={!form.email}
               >
                 중복확인
               </button>
@@ -51,6 +120,8 @@ const RegisterForm: React.FC = () => {
               type="password"
               className="w-full p-2 border rounded bg-white placeholder-gray-400"
               placeholder="영문+숫자+특수문자 8-20자리"
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
           </div>
 
@@ -60,6 +131,8 @@ const RegisterForm: React.FC = () => {
               type="password"
               className="w-full p-2 border rounded bg-white placeholder-gray-400"
               placeholder="비밀번호를 한번 더 입력해 주세요."
+              value={form.passwordConfirm}
+              onChange={(e) => setForm({ ...form, passwordConfirm: e.target.value })}
             />
           </div>
 
@@ -69,6 +142,8 @@ const RegisterForm: React.FC = () => {
               type="text"
               className="w-full p-2 border rounded bg-white placeholder-gray-400"
               placeholder="국문 또는 영문 이름 / 2자, 특수문자 불가"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
           </div>
 
