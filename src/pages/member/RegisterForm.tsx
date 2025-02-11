@@ -157,7 +157,7 @@ const RegisterForm: React.FC = () => {
                     value="14up"
                     className="hidden"
                     checked={form.age === '14세 이상'}
-                    onChange={(e) => setForm({ ...form, age: '14세 이상' })}
+                    onChange={() => setForm({ ...form, age: '14세 이상' })}
                 />
                 <div className={`text-center py-3 border rounded-md cursor-pointer transition-colors
                     ${form.age === '14세 이상' 
@@ -173,7 +173,7 @@ const RegisterForm: React.FC = () => {
                     value="14down"
                     className="hidden"
                     checked={form.age === '14세 미만'}
-                    onChange={(e) => setForm({ ...form, age: '14세 미만' })}
+                    onChange={() => setForm({ ...form, age: '14세 미만' })}
                 />
                 <div className={`text-center py-3 border rounded-md cursor-pointer transition-colors
                     ${form.age === '14세 미만' 

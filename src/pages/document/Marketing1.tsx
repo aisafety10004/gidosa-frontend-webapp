@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 const Marketing1 = () => {
   return <div>Marketing1</div>;

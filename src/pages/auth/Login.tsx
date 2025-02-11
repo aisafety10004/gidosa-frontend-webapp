@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
-  const [form, setForm] = useState({
-    id: '',
-    password: ''
-  });
+  // const [form, setForm] = useState({
+  //   id: '',
+  //   password: ''
+  // });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
